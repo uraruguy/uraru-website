@@ -4,652 +4,28 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jakob Kavčič | AI Solutions & Innovation</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        :root {
-            --ice-blue: #E0F4FF;
-            --arctic-blue: #00A8E8;
-            --deep-blue: #003459;
-            --polar-white: #FFFFFF;
-            --glacier: #B8E0F6;
-            --night-sky: #0A192F;
-            --accent-cyan: #00D9FF;
-        }
-
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: var(--night-sky);
-            color: var(--polar-white);
-            overflow-x: hidden;
-            line-height: 1.6;
-        }
-
-        /* Animated gradient background */
-        .gradient-bg {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            background: linear-gradient(-45deg, #0A192F, #003459, #00546F, #005F73);
-            background-size: 400% 400%;
-            animation: gradientShift 15s ease infinite;
-        }
-
-        @keyframes gradientShift {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-
-        /* Floating particles */
-        .particles {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            overflow: hidden;
-        }
-
-        .particle {
-            position: absolute;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 50%;
-            animation: float linear infinite;
-        }
-
-        @keyframes float {
-            0% {
-                transform: translateY(100vh) rotate(0deg);
-                opacity: 0;
-            }
-            10% {
-                opacity: 0.3;
-            }
-            90% {
-                opacity: 0.3;
-            }
-            100% {
-                transform: translateY(-100px) rotate(360deg);
-                opacity: 0;
-            }
-        }
-
-        /* Navigation */
-        nav {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            padding: 1.5rem 5%;
-            background: rgba(10, 25, 47, 0.7);
-            backdrop-filter: blur(10px);
-            z-index: 1000;
-            transition: all 0.3s ease;
-        }
-
-        nav.scrolled {
-            padding: 1rem 5%;
-            background: rgba(10, 25, 47, 0.95);
-            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
-        }
-
-        .nav-content {
-            max-width: 1400px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            font-size: 1.8rem;
-            font-weight: 700;
-            background: linear-gradient(135deg, var(--accent-cyan), var(--arctic-blue));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            cursor: pointer;
-            transition: transform 0.3s ease;
-        }
-
-        .logo:hover {
-            transform: scale(1.05);
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 2rem;
-            list-style: none;
-        }
-
-        .nav-links a {
-            color: var(--ice-blue);
-            text-decoration: none;
-            font-weight: 500;
-            transition: color 0.3s ease;
-            position: relative;
-        }
-
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--accent-cyan);
-            transition: width 0.3s ease;
-        }
-
-        .nav-links a:hover::after {
-            width: 100%;
-        }
-
-        /* Hero Section */
-        .hero {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            padding: 2rem;
-        }
-
-        .hero-content {
-            max-width: 1400px;
-            width: 100%;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
-            align-items: center;
-        }
-
-        .hero-text {
-            opacity: 0;
-            animation: fadeInUp 1s ease forwards;
-        }
-
-        @keyframes fadeInUp {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .hero-text {
-            transform: translateY(30px);
-        }
-
-        .greeting {
-            font-size: 1.2rem;
-            color: var(--accent-cyan);
-            margin-bottom: 1rem;
-            font-weight: 500;
-        }
-
-        h1 {
-            font-size: 4rem;
-            margin-bottom: 1rem;
-            line-height: 1.1;
-            background: linear-gradient(135deg, var(--polar-white), var(--glacier));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .tagline {
-            font-size: 1.5rem;
-            color: var(--glacier);
-            margin-bottom: 2rem;
-            font-weight: 300;
-        }
-
-        .hero-description {
-            font-size: 1.1rem;
-            color: var(--ice-blue);
-            margin-bottom: 2rem;
-            line-height: 1.8;
-        }
-
-        .cta-buttons {
-            display: flex;
-            gap: 1.5rem;
-            flex-wrap: wrap;
-        }
-
-        .btn {
-            padding: 1rem 2.5rem;
-            border: none;
-            border-radius: 50px;
-            font-size: 1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-decoration: none;
-            display: inline-block;
-        }
-
-        .btn-primary {
-            background: linear-gradient(135deg, var(--accent-cyan), var(--arctic-blue));
-            color: var(--night-sky);
-            box-shadow: 0 10px 30px rgba(0, 217, 255, 0.3);
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 40px rgba(0, 217, 255, 0.5);
-        }
-
-        .btn-secondary {
-            background: transparent;
-            border: 2px solid var(--accent-cyan);
-            color: var(--accent-cyan);
-        }
-
-        .btn-secondary:hover {
-            background: var(--accent-cyan);
-            color: var(--night-sky);
-            transform: translateY(-3px);
-        }
-
-        /* Polar Bear Animation */
-        .hero-visual {
-            position: relative;
-            height: 500px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .polar-bear-container {
-            position: relative;
-            width: 400px;
-            height: 400px;
-            animation: floatBear 6s ease-in-out infinite;
-        }
-
-        @keyframes floatBear {
-            0%, 100% { transform: translateY(0px) rotate(-2deg); }
-            50% { transform: translateY(-20px) rotate(2deg); }
-        }
-
-        .polar-bear {
-            font-size: 300px;
-            filter: drop-shadow(0 20px 40px rgba(0, 217, 255, 0.3));
-            animation: pulse 3s ease-in-out infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% { filter: drop-shadow(0 20px 40px rgba(0, 217, 255, 0.3)); }
-            50% { filter: drop-shadow(0 25px 50px rgba(0, 217, 255, 0.5)); }
-        }
-
-        .ice-crystal {
-            position: absolute;
-            color: var(--accent-cyan);
-            opacity: 0.3;
-            animation: rotate 20s linear infinite;
-        }
-
-        .crystal-1 { top: 10%; left: 10%; font-size: 2rem; }
-        .crystal-2 { top: 20%; right: 15%; font-size: 1.5rem; animation-duration: 15s; }
-        .crystal-3 { bottom: 15%; left: 5%; font-size: 2.5rem; animation-duration: 25s; }
-        .crystal-4 { bottom: 25%; right: 10%; font-size: 1.8rem; animation-duration: 18s; }
-
-        @keyframes rotate {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
-
-        /* About Section */
-        section {
-            padding: 8rem 5%;
-            position: relative;
-        }
-
-        .section-content {
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-
-        .section-title {
-            font-size: 3rem;
-            margin-bottom: 3rem;
-            text-align: center;
-            background: linear-gradient(135deg, var(--accent-cyan), var(--arctic-blue));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .about-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-        }
-
-        .card {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            padding: 2.5rem;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            transition: all 0.3s ease;
-            opacity: 0;
-            transform: translateY(30px);
-        }
-
-        .card.visible {
-            animation: fadeInUp 0.6s ease forwards;
-        }
-
-        .card:hover {
-            transform: translateY(-10px);
-            border-color: var(--accent-cyan);
-            box-shadow: 0 20px 40px rgba(0, 217, 255, 0.2);
-        }
-
-        .card-icon {
-            font-size: 3rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .card h3 {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-            color: var(--accent-cyan);
-        }
-
-        .card p {
-            color: var(--ice-blue);
-            line-height: 1.8;
-        }
-
-        /* Services Section */
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
-        }
-
-        .service-card {
-            background: linear-gradient(135deg, rgba(0, 168, 232, 0.1), rgba(0, 217, 255, 0.05));
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            padding: 2.5rem;
-            border: 1px solid rgba(0, 217, 255, 0.2);
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-            opacity: 0;
-            transform: translateY(30px);
-        }
-
-        .service-card.visible {
-            animation: fadeInUp 0.6s ease forwards;
-        }
-
-        .service-card::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(0, 217, 255, 0.1) 0%, transparent 70%);
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-
-        .service-card:hover::before {
-            opacity: 1;
-        }
-
-        .service-card:hover {
-            transform: translateY(-10px) scale(1.02);
-            border-color: var(--accent-cyan);
-            box-shadow: 0 20px 50px rgba(0, 217, 255, 0.3);
-        }
-
-        .service-icon {
-            font-size: 3.5rem;
-            margin-bottom: 1.5rem;
-            display: block;
-        }
-
-        /* Contact Section */
-        .contact-container {
-            max-width: 800px;
-            margin: 0 auto;
-            text-align: center;
-        }
-
-        .contact-text {
-            font-size: 1.3rem;
-            color: var(--ice-blue);
-            margin-bottom: 3rem;
-            line-height: 1.8;
-        }
-
-        .social-links {
-            display: flex;
-            justify-content: center;
-            gap: 2rem;
-            margin-bottom: 3rem;
-            flex-wrap: wrap;
-        }
-
-        .social-link {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            padding: 1rem 2rem;
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 50px;
-            color: var(--ice-blue);
-            text-decoration: none;
-            transition: all 0.3s ease;
-            font-size: 1.1rem;
-        }
-
-        .social-link:hover {
-            background: var(--accent-cyan);
-            color: var(--night-sky);
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(0, 217, 255, 0.4);
-        }
-
-        .email-link {
-            font-size: 1.5rem;
-            color: var(--accent-cyan);
-            text-decoration: none;
-            padding: 1.5rem 3rem;
-            border: 2px solid var(--accent-cyan);
-            border-radius: 50px;
-            display: inline-block;
-            transition: all 0.3s ease;
-            font-weight: 600;
-        }
-
-        .email-link:hover {
-            background: var(--accent-cyan);
-            color: var(--night-sky);
-            transform: scale(1.05);
-            box-shadow: 0 10px 40px rgba(0, 217, 255, 0.5);
-        }
-
-        /* Footer */
-        footer {
-            padding: 3rem 5%;
-            text-align: center;
-            background: rgba(0, 0, 0, 0.3);
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        footer p {
-            color: var(--glacier);
-        }
-
-        /* Responsive Design */
-        @media (max-width: 1024px) {
-            .hero-content {
-                grid-template-columns: 1fr;
-                gap: 3rem;
-            }
-
-            .hero-visual {
-                order: -1;
-                height: 400px;
-            }
-
-            .polar-bear-container {
-                width: 300px;
-                height: 300px;
-            }
-
-            .polar-bear {
-                font-size: 220px;
-            }
-
-            h1 {
-                font-size: 3rem;
-            }
-
-            .tagline {
-                font-size: 1.3rem;
-            }
-        }
-
-        @media (max-width: 768px) {
-            nav {
-                padding: 1rem 5%;
-            }
-
-            .nav-links {
-                gap: 1rem;
-            }
-
-            .nav-links a {
-                font-size: 0.9rem;
-            }
-
-            h1 {
-                font-size: 2.5rem;
-            }
-
-            .tagline {
-                font-size: 1.2rem;
-            }
-
-            .section-title {
-                font-size: 2.2rem;
-            }
-
-            .hero-visual {
-                height: 300px;
-            }
-
-            .polar-bear-container {
-                width: 250px;
-                height: 250px;
-            }
-
-            .polar-bear {
-                font-size: 180px;
-            }
-
-            .cta-buttons {
-                flex-direction: column;
-            }
-
-            .btn {
-                width: 100%;
-                text-align: center;
-            }
-
-            section {
-                padding: 5rem 5%;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .logo {
-                font-size: 1.4rem;
-            }
-
-            .nav-links {
-                gap: 0.5rem;
-                font-size: 0.85rem;
-            }
-
-            h1 {
-                font-size: 2rem;
-            }
-
-            .greeting {
-                font-size: 1rem;
-            }
-
-            .tagline {
-                font-size: 1rem;
-            }
-
-            .hero-description {
-                font-size: 1rem;
-            }
-
-            .polar-bear-container {
-                width: 200px;
-                height: 200px;
-            }
-
-            .polar-bear {
-                font-size: 150px;
-            }
-        }
-
-        /* Scroll reveal animation */
-        .reveal {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.6s ease;
-        }
-
-        .reveal.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* Smooth scroll */
-        html {
-            scroll-behavior: smooth;
-        }
-    </style>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <!-- Animated Background -->
-    <div class="gradient-bg"></div>
-    <div class="particles" id="particles"></div>
+    <!-- Polar Bear Background -->
+    <div class="bg-container">
+        <div class="bg-overlay"></div>
+        <div class="bg-image" id="bgImage"></div>
+        <div class="bg-gradient"></div>
+    </div>
 
     <!-- Navigation -->
     <nav id="navbar">
         <div class="nav-content">
             <div class="logo">URARU</div>
             <ul class="nav-links">
-                <li><a href="#home">Home</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#services">Services</a></li>
-                <li><a href="#contact">Contact</a></li>
+                <li><a href="#home">HOME</a></li>
+                <li><a href="#about">ABOUT</a></li>
+                <li><a href="#services">SERVICES</a></li>
+                <li><a href="#contact">CONTACT</a></li>
             </ul>
         </div>
     </nav>
@@ -657,209 +33,136 @@
     <!-- Hero Section -->
     <section class="hero" id="home">
         <div class="hero-content">
-            <div class="hero-text">
-                <div class="greeting">Hi, I'm</div>
-                <h1>Jakob Kavčič</h1>
-                <div class="tagline">AI Solutions Architect</div>
+            <div class="hero-text" data-scroll>
+                <div class="subtitle">AI SOLUTIONS ARCHITECT</div>
+                <h1 class="glitch" data-text="JAKOB KAVČIČ">JAKOB KAVČIČ</h1>
                 <p class="hero-description">
-                    Creating AI-driven solutions that scale businesses, optimize workflows, and transform operations.
-                    Building the future, one intelligent system at a time.
+                    Engineering the future of artificial intelligence.<br>
+                    Building scalable systems that transform businesses.
                 </p>
                 <div class="cta-buttons">
-                    <a href="#contact" class="btn btn-primary">Let's Connect</a>
-                    <a href="#services" class="btn btn-secondary">Explore Services</a>
+                    <a href="#contact" class="btn btn-primary">START A PROJECT</a>
+                    <a href="#services" class="btn btn-secondary">VIEW SERVICES</a>
                 </div>
             </div>
-            <div class="hero-visual">
-                <div class="polar-bear-container">
-                    <div class="polar-bear">🐻‍❄️</div>
-                    <div class="ice-crystal crystal-1">❄️</div>
-                    <div class="ice-crystal crystal-2">❄️</div>
-                    <div class="ice-crystal crystal-3">❄️</div>
-                    <div class="ice-crystal crystal-4">❄️</div>
-                </div>
+            <div class="scroll-indicator" data-scroll>
+                <div class="scroll-line"></div>
+                <span>SCROLL</span>
             </div>
         </div>
     </section>
 
     <!-- About Section -->
-    <section id="about">
+    <section id="about" class="section">
         <div class="section-content">
-            <h2 class="section-title">About Me</h2>
+            <div class="section-header" data-scroll>
+                <span class="section-number">01</span>
+                <h2 class="section-title">ABOUT</h2>
+            </div>
+
             <div class="about-grid">
-                <div class="card reveal">
-                    <div class="card-icon">🎓</div>
-                    <h3>Education</h3>
-                    <p>Electrical Engineering student with a passion for cutting-edge technology and innovation.</p>
+                <div class="about-card" data-scroll>
+                    <div class="card-number">01</div>
+                    <h3>EDUCATION</h3>
+                    <p>Electrical Engineering student specializing in advanced AI systems and machine learning architectures.</p>
                 </div>
-                <div class="card reveal">
-                    <div class="card-icon">🚀</div>
-                    <h3>Uraru AI Agency</h3>
-                    <p>Founder & CEO, delivering AI solutions that drive real business impact and operational excellence.</p>
+                <div class="about-card" data-scroll>
+                    <div class="card-number">02</div>
+                    <h3>URARU AI AGENCY</h3>
+                    <p>Founder & CEO. Delivering enterprise-level AI solutions that drive measurable business impact.</p>
                 </div>
-                <div class="card reveal">
-                    <div class="card-icon">📍</div>
-                    <h3>Based in Ljubljana</h3>
-                    <p>Working globally, rooted locally. Bringing world-class AI expertise to businesses everywhere.</p>
+                <div class="about-card" data-scroll>
+                    <div class="card-number">03</div>
+                    <h3>GLOBAL REACH</h3>
+                    <p>Based in Ljubljana. Operating worldwide. Bringing cutting-edge AI expertise to businesses globally.</p>
                 </div>
-                <div class="card reveal">
-                    <div class="card-icon">⚽</div>
-                    <h3>Life Beyond Code</h3>
-                    <p>Football enthusiast, skiing adventurer, hiking explorer, technology geek, and travel lover.</p>
+                <div class="about-card" data-scroll>
+                    <div class="card-number">04</div>
+                    <h3>BEYOND TECH</h3>
+                    <p>Athlete. Adventurer. Innovator. Balancing high-performance engineering with an active lifestyle.</p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Services Section -->
-    <section id="services">
+    <section id="services" class="section">
         <div class="section-content">
-            <h2 class="section-title">What I Do</h2>
+            <div class="section-header" data-scroll>
+                <span class="section-number">02</span>
+                <h2 class="section-title">SERVICES</h2>
+            </div>
+
             <div class="services-grid">
-                <div class="service-card reveal">
-                    <span class="service-icon">🤖</span>
-                    <h3>AI Solutions</h3>
-                    <p>Custom AI systems tailored to your business needs, from automation to intelligent decision-making.</p>
+                <div class="service-card" data-scroll>
+                    <div class="service-number">01</div>
+                    <h3>AI SYSTEMS DEVELOPMENT</h3>
+                    <p>Custom AI solutions engineered for your specific business needs. From automation to predictive analytics.</p>
+                    <div class="service-line"></div>
                 </div>
-                <div class="service-card reveal">
-                    <span class="service-icon">📊</span>
-                    <h3>Business Scaling</h3>
-                    <p>Strategic AI integration to accelerate growth and unlock new revenue opportunities.</p>
+                <div class="service-card" data-scroll>
+                    <div class="service-number">02</div>
+                    <h3>BUSINESS SCALING</h3>
+                    <p>Strategic AI integration that accelerates growth and unlocks new revenue streams.</p>
+                    <div class="service-line"></div>
                 </div>
-                <div class="service-card reveal">
-                    <span class="service-icon">⚡</span>
-                    <h3>Workflow Optimization</h3>
-                    <p>Streamline operations, reduce costs, and boost productivity with intelligent automation.</p>
+                <div class="service-card" data-scroll>
+                    <div class="service-number">03</div>
+                    <h3>WORKFLOW OPTIMIZATION</h3>
+                    <p>Intelligent automation that streamlines operations, reduces costs, and maximizes productivity.</p>
+                    <div class="service-line"></div>
                 </div>
-                <div class="service-card reveal">
-                    <span class="service-icon">💡</span>
-                    <h3>Innovation Consulting</h3>
-                    <p>Transform your vision into reality with cutting-edge AI strategies and implementation.</p>
+                <div class="service-card" data-scroll>
+                    <div class="service-number">04</div>
+                    <h3>INNOVATION CONSULTING</h3>
+                    <p>Transform vision into reality with cutting-edge AI strategies and implementation roadmaps.</p>
+                    <div class="service-line"></div>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Contact Section -->
-    <section id="contact">
+    <section id="contact" class="section">
         <div class="section-content">
+            <div class="section-header" data-scroll>
+                <span class="section-number">03</span>
+                <h2 class="section-title">CONTACT</h2>
+            </div>
+
             <div class="contact-container">
-                <h2 class="section-title">Let's Build Something Amazing</h2>
-                <p class="contact-text">
-                    Ready to transform your business with AI? Let's discuss how we can work together
-                    to create innovative solutions that drive real results.
+                <h3 class="contact-heading" data-scroll>LET'S BUILD SOMETHING EXTRAORDINARY</h3>
+                <p class="contact-text" data-scroll>
+                    Ready to transform your business with AI?<br>
+                    Let's discuss how we can create innovative solutions together.
                 </p>
 
-                <div class="social-links">
-                    <a href="https://www.linkedin.com/in/jakob-kavčič" target="_blank" class="social-link">
-                        <span>💼</span>
-                        <span>LinkedIn</span>
+                <div class="contact-links" data-scroll>
+                    <a href="mailto:jakob.kavci@gmail.com" class="contact-link">
+                        <span class="link-label">EMAIL</span>
+                        <span class="link-value">jakob.kavci@gmail.com</span>
                     </a>
-                    <a href="https://x.com/JakobKavci" target="_blank" class="social-link">
-                        <span>𝕏</span>
-                        <span>Twitter</span>
+                    <a href="https://www.linkedin.com/in/jakob-kavčič" target="_blank" class="contact-link">
+                        <span class="link-label">LINKEDIN</span>
+                        <span class="link-value">Jakob Kavčič</span>
+                    </a>
+                    <a href="https://x.com/JakobKavci" target="_blank" class="contact-link">
+                        <span class="link-label">TWITTER</span>
+                        <span class="link-value">@JakobKavci</span>
                     </a>
                 </div>
-
-                <a href="mailto:jakob.kavci@gmail.com" class="email-link">
-                    jakob.kavci@gmail.com
-                </a>
             </div>
         </div>
     </section>
 
     <!-- Footer -->
     <footer>
-        <p>© 2024 Jakob Kavčič | Uraru AI Agency | Built with passion 🐻‍❄️</p>
+        <div class="footer-content">
+            <p>&copy; 2024 JAKOB KAVČIČ | URARU AI AGENCY</p>
+            <p>ENGINEERING THE FUTURE</p>
+        </div>
     </footer>
 
-    <script>
-        // Particle system
-        function createParticles() {
-            const particlesContainer = document.getElementById('particles');
-            const particleCount = 50;
-
-            for (let i = 0; i < particleCount; i++) {
-                const particle = document.createElement('div');
-                particle.className = 'particle';
-
-                const size = Math.random() * 5 + 2;
-                particle.style.width = `${size}px`;
-                particle.style.height = `${size}px`;
-                particle.style.left = `${Math.random() * 100}%`;
-                particle.style.animationDuration = `${Math.random() * 20 + 15}s`;
-                particle.style.animationDelay = `${Math.random() * 5}s`;
-
-                particlesContainer.appendChild(particle);
-            }
-        }
-
-        // Navbar scroll effect
-        window.addEventListener('scroll', () => {
-            const navbar = document.getElementById('navbar');
-            if (window.scrollY > 100) {
-                navbar.classList.add('scrolled');
-            } else {
-                navbar.classList.remove('scrolled');
-            }
-        });
-
-        // Scroll reveal
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -100px 0px'
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
-            });
-        }, observerOptions);
-
-        document.querySelectorAll('.reveal, .card, .service-card').forEach((element) => {
-            observer.observe(element);
-        });
-
-        // Smooth scroll for navigation links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
-        });
-
-        // Initialize particles
-        createParticles();
-
-        // Add mouse parallax effect to polar bear
-        document.addEventListener('mousemove', (e) => {
-            const bear = document.querySelector('.polar-bear-container');
-            const mouseX = e.clientX / window.innerWidth;
-            const mouseY = e.clientY / window.innerHeight;
-
-            const moveX = (mouseX - 0.5) * 30;
-            const moveY = (mouseY - 0.5) * 30;
-
-            bear.style.transform = `translate(${moveX}px, ${moveY}px)`;
-        });
-
-        // Add random sparkle effect
-        setInterval(() => {
-            const crystals = document.querySelectorAll('.ice-crystal');
-            crystals.forEach(crystal => {
-                if (Math.random() > 0.7) {
-                    crystal.style.opacity = Math.random() * 0.5 + 0.3;
-                }
-            });
-        }, 2000);
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
